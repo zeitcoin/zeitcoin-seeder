@@ -31,7 +31,7 @@ public:
   CDnsSeedOpts() : nThreads(96), nDnsThreads(4), nPort(53), mbox(NULL), ns(NULL), host(NULL), tor(NULL), fUseTestNet(false), fWipeBan(false), fWipeIgnore(false) {}
 
   void ParseCommandLine(int argc, char **argv) {
-    static const char *help = "Bitcoin-seeder\n"
+    static const char *help = "Mintcoin-seeder\n"
                               "Usage: %s -h <host> -n <ns> [-m <mbox>] [-t <threads>] [-p <port>]\n"
                               "\n"
                               "Options:\n"
@@ -339,13 +339,33 @@ extern "C" void* ThreadStats(void*) {
   } while(1);
 }
 
-static const string mainnet_seeds[] = {"dnsseed.bluematt.me", "bitseed.xf2.org", "dnsseed.bitcoin.dashjr.org", "seed.bitcoin.sipa.be", ""};
-static const string testnet_seeds[] = {"testnet-seed.bitcoin.petertodd.org", "static-testnet-seed.bitcoin.petertodd.org", ""};
+static const string mainnet_seeds[] = {"mintseed.keremhd.name.tr", ""};
+static const string testnet_seeds[] = {""};
 static const string *seeds = mainnet_seeds;
 
 extern "C" void* ThreadSeeder(void*) {
   if (!fTestNet){
-    db.Add(CService("kjy2eqzk4zwi5zd3.onion", 8333), true);
+    /*
+       These IPs provide bootstrapping in case no DNS seed is available. They will
+       eventually become inaccessible.
+    */
+    const string mainnet_bootstrap_nodes[] = {
+      /* These nodes were fetched from MintCoin network on May 15, 2014. */
+      "162.243.4.85", "79.136.10.173", "71.229.213.22", "68.197.68.226", "96.246.196.94",
+      "150.140.159.228", "95.132.87.251", "72.218.136.104", "62.205.137.36", "188.173.133.47", 
+
+      /* The following nodes were distributed as addnode= in MintCoin 1.9.1 default config, but they seem offline */
+      /*
+      "24.1.36.30", "109.230.231.157", "83.142.4.39", "90.204.65.190", "24.203.12.17",
+      "78.139.69.111", "75.179.53.22", "121.45.113.101", "181.165.189.173", "80.219.19.38",
+      "162.243.208.243", "78.88.67.121", "50.151.70.41", "5.135.161.122", "2.3.235.89",
+      "111.161.17.76", "84.25.66.65",*/
+
+       ""
+      };
+    for (int i=0; mainnet_bootstrap_nodes[i] != ""; i++) {
+      db.Add(CService(mainnet_bootstrap_nodes[i], GetDefaultPort()), true);
+    }
   }
   do {
     for (int i=0; seeds[i] != ""; i++) {
@@ -374,10 +394,10 @@ int main(int argc, char **argv) {
   bool fDNS = true;
   if (opts.fUseTestNet) {
       printf("Using testnet.\n");
-      pchMessageStart[0] = 0x0b;
-      pchMessageStart[1] = 0x11;
-      pchMessageStart[2] = 0x09;
-      pchMessageStart[3] = 0x07;
+      pchMessageStart[0] = 0xcd;
+      pchMessageStart[1] = 0xf2;
+      pchMessageStart[2] = 0xc0;
+      pchMessageStart[3] = 0xef;
       seeds = testnet_seeds;
       fTestNet = true;
   }

@@ -46,6 +46,11 @@ On the system vps.example.com, you can now run dnsseed:
 If you want the DNS server to report SOA records, please provide an
 e-mailadres (with the @ part replaced by .) using -m.
 
+If you want dnsseed to answer any queried domain with seed node IPs,
+you can use *:
+./dnsseed -h '*' -n vps.example.com
+
+
 RUNNING AS NON-ROOT
 -------------------
 

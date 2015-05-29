@@ -1,20 +1,20 @@
-mintcoin-seeder
+Zeitcoin-seeder
 ==============
 
-This software is forked from bitcoin-seeder and modified for MintCoin network.
+This software is forked from bitcoin-seeder and modified for Zeitcoin network.
 
 Original version resides at https://github.com/sipa/bitcoin-seeder
-Mintcoin version resides at https://github.com/keremhd/mintcoin-seeder
+Mintcoin version resides at https://github.com/zeitcoin/zeitcoin-seeder
 
 If you cannot get it bootstrap any node IPs, edit main.cpp, and add your
-local client's IP address to mainnet_bootstrap_nodes. Mintcoin client will
+local client's IP address to mainnet_bootstrap_nodes. Zeitcoin client will
 fill in some IPs (found from IRC), and mintcoin-seeder will do the rest.
 
 
 ---------------------------------------------------------------------------
 
 
-Mintcoin-seeder is a crawler for the Mintcoin network, which exposes a list
+Zeitcoin-seeder is a crawler for the Zeitcoin network, which exposes a list
 of reliable nodes via a built-in DNS server.
 
 Features:

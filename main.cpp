@@ -31,7 +31,7 @@ public:
   CDnsSeedOpts() : nThreads(96), nDnsThreads(4), nPort(53), mbox(NULL), ns(NULL), host(NULL), tor(NULL), fUseTestNet(false), fWipeBan(false), fWipeIgnore(false) {}
 
   void ParseCommandLine(int argc, char **argv) {
-    static const char *help = "Mintcoin-seeder\n"
+    static const char *help = "Zeitcoin-seeder\n"
                               "Usage: %s -h <host> -n <ns> [-m <mbox>] [-t <threads>] [-p <port>]\n"
                               "\n"
                               "Options:\n"
@@ -350,7 +350,7 @@ extern "C" void* ThreadSeeder(void*) {
        eventually become inaccessible.
     */
     const string mainnet_bootstrap_nodes[] = {
-      /* These nodes were fetched from MintCoin network on May 15, 2014. */
+      /* These nodes were fetched from Zeitcoin network on May 15, 2014. */
       "162.243.4.85", "79.136.10.173", "71.229.213.22", "68.197.68.226", "96.246.196.94",
       "150.140.159.228", "95.132.87.251", "72.218.136.104", "62.205.137.36", "188.173.133.47", 
 
